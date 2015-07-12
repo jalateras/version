@@ -2,7 +2,6 @@
 
 GDFLAGS ?= $(GDFLAGS:)
 ARGS ?= $(ARGS:)
-BUILDDIR = build
 
 EXTERNAL_TOOLS=\
 	github.com/tools/godep \
@@ -15,7 +14,6 @@ bootstrap:
 		echo "===> Installing $$tool" ; \
     go get $$tool; \
 	done
-	@godep save
 
 clean:
 	@echo "===> Cleaning"
