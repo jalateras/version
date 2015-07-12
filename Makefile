@@ -1,8 +1,9 @@
-.PHONY: all clean echo test fmt install bench run bootstrap run
+.PHONY: all clean echo test fmt install bench run bootstrap build
 
 EXECUTABLE = version
 GDFLAGS ?= $(GDFLAGS:)
 ARGS ?= $(ARGS:)
+BUILDDIR = build
 
 EXTERNAL_TOOLS=\
 	github.com/tools/godep \
@@ -23,7 +24,7 @@ clean:
 
 build:
 	@echo "===> Building"
-	@godep go build $(GDFLAGS) -o $(EXECUTABLE) ./...
+	@godep go build $(GDFLAGS) -o $(BUILDDIR)/$(EXECUTABLE) ./...
 
 fmt:
 	@echo "===> Formatting"

@@ -3,11 +3,10 @@ package main
 import (
 	"net/http"
 	"os"
-	"fmt"
 	"strconv"
 
-	"github.com/gorilla/mux"
-	"github.com/codegangsta/negroni"
+	"github.com/labstack/echo"
+	mw "github.com/labstack/echo/middleware"
 	"github.com/codegangsta/cli"
 )
 
@@ -20,6 +19,12 @@ const (
 This service support the PageLoad Version API
 `
 )
+
+type VersionInfo struct {
+	Name string `json:"name"`
+	Version string `json:"version"`
+	Author string `json:"author"`
+}
 
 func main()  {
 	app := cli.NewApp()
@@ -41,21 +46,30 @@ func main()  {
 			EnvVar: "PORT",
 		},
 	}
-	app.Action = launchService
+	app.Action = createService()
 
 	app.Run(os.Args)
 }
 
-func launchService(ctx *cli.Context) {
-	router := mux.NewRouter().StrictSlash(false)
-	router.HandleFunc("/", HomeHandler)
+func createService() func(*cli.Context) {
+	return func(ctx *cli.Context) {
+		server := echo.New()
+		server.SetDebug(false)
+		server.Use(mw.Logger())
+		server.Use(mw.Recover())
 
-	server := negroni.Classic();
-	server.UseHandler(router)
-	server.Run(ctx.String("host") + ":" + strconv.Itoa(ctx.Int("port")))
-	fmt.Println("Server running on :" + strconv.Itoa(ctx.Int("port")))
+		server.Get("/", HomeHandler)
+
+		server.Run(ctx.String("host") + ":" + strconv.Itoa(ctx.Int("port")))
+	}
 }
 
-func HomeHandler(resp http.ResponseWriter, req *http.Request) {
-	fmt.Fprintln(resp, "Home")
+func HomeHandler(ctx *echo.Context) error {
+	versionInfo := VersionInfo{
+		Name: APP_NAME,
+		Version: APP_VERSION,
+		Author: APP_AUTHOR,
+	}
+
+	return ctx.JSON(http.StatusOK, &versionInfo)
 }

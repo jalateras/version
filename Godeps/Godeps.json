@@ -3,22 +3,31 @@
 	"GoVersion": "go1.4.2",
 	"Deps": [
 		{
+			"ImportPath": "github.com/bradfitz/http2",
+			"Rev": "f8202bc903bda493ebba4aa54922d78430c2c42f"
+		},
+		{
 			"ImportPath": "github.com/codegangsta/cli",
 			"Comment": "1.2.0-137-gbca61c4",
 			"Rev": "bca61c476e3c752594983e4c9bcd5f62fb09f157"
 		},
 		{
-			"ImportPath": "github.com/codegangsta/negroni",
-			"Comment": "v0.1-70-gc7477ad",
-			"Rev": "c7477ad8e330bef55bf1ebe300cf8aa67c492d1b"
+			"ImportPath": "github.com/labstack/echo",
+			"Comment": "v1.0.0-25-g4abea5d",
+			"Rev": "4abea5d987a0ecf270d8707c46720998859a6e85"
 		},
 		{
-			"ImportPath": "github.com/gorilla/context",
-			"Rev": "215affda49addc4c8ef7e2534915df2c8c35c6cd"
+			"ImportPath": "github.com/labstack/gommon/color",
+			"Comment": "v0.0.3-5-g3dc2d67",
+			"Rev": "3dc2d67251832fa0da35728aada6a9c377cb2442"
 		},
 		{
-			"ImportPath": "github.com/gorilla/mux",
-			"Rev": "47e8f450ef38c857cdd922ec08862ca9d65a1c6d"
+			"ImportPath": "github.com/mattn/go-colorable",
+			"Rev": "40e4aedc8fabf8c23e040057540867186712faa5"
+		},
+		{
+			"ImportPath": "golang.org/x/net/websocket",
+			"Rev": "d9558e5c97f85372afee28cf2b6059d7d3818919"
 		}
 	]
 }
