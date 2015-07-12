@@ -1,6 +1,5 @@
 .PHONY: all clean echo test fmt install bench run bootstrap build
 
-EXECUTABLE = version
 GDFLAGS ?= $(GDFLAGS:)
 ARGS ?= $(ARGS:)
 BUILDDIR = build
@@ -22,15 +21,19 @@ clean:
 	@echo "===> Cleaning"
 	@godep go clean $(GDFLAGS) -i ./...
 
-build:
+build: fmt lint
 	@echo "===> Building"
-	@godep go build $(GDFLAGS) -o $(BUILDDIR)/$(EXECUTABLE) ./...
+	@godep go build $(GDFLAGS)  ./...
 
 fmt:
 	@echo "===> Formatting"
 	@godep go fmt $(GDFLAGS) ./...
 
-install:
+lint:
+	@echo "===> Linting with vet"
+	@godep go vet $(GDFLAGS) ./...
+
+install: build
 	@echo "===> Installing"
 	@godep go install $(GDFLAGS)
 

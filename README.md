@@ -1,17 +1,23 @@
 ## A Skelton Micro Seervice in Go
 
-Puts together 
+A simple layout for a micro service written in `golang` 
 
 
 ### Configuration
 We are using the [codegansta cli](https://github.com/codegangsta/cli) package for all configuration management.
 
-### Middleware 
-We are using the [megroni](https://github.com/codegangsta/negroni) component for our middleware
+### Server  
+We are using the [echo](https://github.com/labstack/echo) micro web framework for the foundation of our micro services.
+It is super fast and provides the ability to plug in middleware and a pretty neat router.
  
-### Router
-The [gorilla mux](https://github.com/gorilla/mux) package is used for the router.
 
 ### Logging
-The [logrus](https://github.com/Sirupsen/logrus) pzckage is used for logging and is API compatible wit hthe standard
+The [logrus](https://github.com/Sirupsen/logrus) package is used for logging and is API compatible wit hthe standard
 library logger.
+
+
+### TODO
+
+* Add some simple metrics (in-memory)
+* Add some health checks
+* Add tests
