@@ -1,7 +1,8 @@
-.PHONY: all clean echo test fmt install bench run bootstrap build
+.PHONY: all clean echo test fmt install bench run bootstrap build docker-build
 
 GDFLAGS ?= $(GDFLAGS:)
 ARGS ?= $(ARGS:)
+TAG ?= latest
 
 EXTERNAL_TOOLS=\
 	github.com/tools/godep \
@@ -49,4 +50,14 @@ start: build
 
 run:
 	@echo "===> Running Server"
-	@godep go run main.go
+	@godep go run *.go
+
+docker-build:
+	@echo "===> Building Dockerfile"
+	@eval "$(docker-machine env)"
+	@docker build -t jalateras/version .
+
+docker-push:
+	@echo "===> Pushing Image"
+	@eval "$(docker-machine env)"
+	@docker push jalateras/version:$(TAG)
